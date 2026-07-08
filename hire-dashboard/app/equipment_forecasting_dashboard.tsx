@@ -366,12 +366,31 @@ export default function Dashboard() {
         if (!res.ok) throw new Error('Live JSON endpoint not found');
         return res.json();
       })
-      .then((payload: LivePipelineData) => {
-        if (payload && payload.kpi_summary) {
-          setData(payload);
-          setIsLive(true);
-        }
-      })
+      .then((payload: any) => {
+
+    if (Array.isArray(payload.weekly_demand_forecast)) {
+        payload.weekly_demand_forecast = {
+            all_categories: payload.weekly_demand_forecast
+        };
+    }
+
+    if (!payload.weekly_return_forecast) {
+        payload.weekly_return_forecast = {
+            all_categories: payload.weekly_demand_forecast.all_categories.map((x:any)=>({
+                week: x.week,
+                expected_returns: 0,
+                cumulative: 0
+            }))
+        };
+    }
+
+    if (!payload.orderTypes) {
+        payload.orderTypes = fallbackData.orderTypes;
+    }
+
+    setData(payload);
+    setIsLive(true);
+})
       .catch((err) => {
         console.warn('Next.js is using built-in high-fidelity analytics fallback payload.', err);
         setData(fallbackData);
@@ -395,16 +414,40 @@ export default function Dashboard() {
   // Determine timeframe length in weeks: 30 days = 4 weeks, 60 days = 8 weeks, 90 days = 12 weeks
   const weekLimit = selectedTimeframe === '30' ? 4 : selectedTimeframe === '60' ? 8 : 12;
 
-  // Safe fetch of weekly series with robust fallbacks to make sure the app never crashes
-  const weeklyDemandForecast = data?.weekly_demand_forecast || fallbackData.weekly_demand_forecast;
-  const weeklyReturnForecast = data?.weekly_return_forecast || fallbackData.weekly_return_forecast;
+  // --------- NORMALIZE LIVE JSON ---------
+const weeklyDemandForecast = Array.isArray(data?.weekly_demand_forecast)
+  ? { all_categories: data.weekly_demand_forecast }
+  : (data?.weekly_demand_forecast ?? fallbackData.weekly_demand_forecast);
 
-  const rawDemandPoints = weeklyDemandForecast[selectedCategory] || weeklyDemandForecast['all_categories'] || [];
-  const rawReturnPoints = weeklyReturnForecast[selectedCategory] || weeklyReturnForecast['all_categories'] || [];
+const weeklyReturnForecast = Array.isArray(data?.weekly_return_forecast)
+  ? { all_categories: data.weekly_return_forecast }
+  : (data?.weekly_return_forecast ?? fallbackData.weekly_return_forecast);
 
-  const demandPoints = rawDemandPoints.slice(0, weekLimit);
-  const returnPoints = rawReturnPoints.slice(0, weekLimit);
+// Demand
+const rawDemandPoints =
+  weeklyDemandForecast[selectedCategory] ??
+  weeklyDemandForecast.all_categories ??
+  [];
 
+// Returns
+const rawReturnPoints =
+  weeklyReturnForecast[selectedCategory] ??
+  weeklyReturnForecast.all_categories ??
+  [];
+
+// Safe arrays
+const demandPoints = Array.isArray(rawDemandPoints)
+  ? rawDemandPoints.slice(0, weekLimit)
+  : [];
+
+const returnPoints = Array.isArray(rawReturnPoints)
+  ? rawReturnPoints.slice(0, weekLimit)
+  : demandPoints.map((d) => ({
+      week: d.week,
+      expected_returns: 0,
+      cumulative: 0,
+    }));
+    
   // Safe calculated KPI metrics
   const summaryKPI = data?.kpi_summary || fallbackData.kpi_summary;
 
@@ -424,12 +467,12 @@ export default function Dashboard() {
   const isDeficit = netBalance < 0;
 
   // Calculate highest chart scale dynamically to avoid overflow cutoffs
-  const maxChartValue = Math.max(
-    ...demandPoints.map(p => p.forecast || 0),
-    ...returnPoints.map(p => p.expected_returns || 0),
-    100
+  const maxChartValue =
+  Math.max(
+    100,
+    ...demandPoints.map((p) => Number(p?.forecast ?? 0)),
+    ...returnPoints.map((p) => Number(p?.expected_returns ?? 0))
   ) * 1.15;
-
   // Safe extraction of Order Types and Attrition values
   const orderTypesData = data?.orderTypes || fallbackData.orderTypes || {
     summary: { hire: 1450200, sale: 45300, oea: 12400 },
