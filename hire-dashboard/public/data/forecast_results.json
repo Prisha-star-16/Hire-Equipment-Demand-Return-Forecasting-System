@@ -1,346 +1,1649 @@
 {
-  "generated_at": "2026-07-07",
-  "model_used": "XGBoost",
-  "total_records": 133668,
-  "forecast_reference_date": "2026-07-07",
-  "model_metrics": {
-    "30-day_(4_wks)": {
-      "prophet_mae": 53659.34,
-      "prophet_rmse": 84895.89,
-      "xgboost_mae": 16453.42,
-      "xgboost_rmse": 23891.59
+  "orderTypes": {
+    "summary": {
+      "hire": 4318551,
+      "sale": 118739,
+      "oea": 35635
     },
-    "60-day_(8_wks)": {
-      "prophet_mae": 58103.38,
-      "prophet_rmse": 90887.78,
-      "xgboost_mae": 12982.17,
-      "xgboost_rmse": 21504.82
-    },
-    "90-day_(13_wks)": {
-      "prophet_mae": 60603.19,
-      "prophet_rmse": 95540.69,
-      "xgboost_mae": 18777.21,
-      "xgboost_rmse": 29278.87
-    }
+    "attritionBreakdown": [
+      {
+        "name": "Other",
+        "sale": 50579,
+        "oea": 3115
+      },
+      {
+        "name": "Accessories & Connectors",
+        "sale": 30220,
+        "oea": 7942
+      },
+      {
+        "name": "Formwork Panels",
+        "sale": 21104,
+        "oea": 9162
+      },
+      {
+        "name": "Scaffolding Components",
+        "sale": 6715,
+        "oea": 8187
+      },
+      {
+        "name": "Walers & Beams",
+        "sale": 8301,
+        "oea": 5977
+      },
+      {
+        "name": "Safety & Railings",
+        "sale": 1158,
+        "oea": 801
+      },
+      {
+        "name": "Transport & Storage",
+        "sale": 486,
+        "oea": 300
+      },
+      {
+        "name": "Alignment & Struts",
+        "sale": 176,
+        "oea": 151
+      }
+    ]
   },
+  "generated_at": "2026-07-09",
+  "model_used": "XGBoost (Recursive Lags)",
+  "total_records": 140686,
+  "forecast_reference_date": "2024-12-30",
   "kpi_summary": {
-    "total_orders": 133668,
-    "unique_equipment_types": 768,
+    "total_orders": 140686,
+    "unique_equipment_types": 1074,
     "avg_hire_duration_days": 240,
-    "total_qty_forecast_30d": 227196,
-    "total_qty_forecast_60d": 265662,
-    "total_qty_forecast_90d": 297160,
-    "most_demanded_category": "Accessories & Connectors"
+    "most_demanded_category": "Formwork Panels",
+    "total_qty_forecast_30d": 835396,
+    "total_qty_forecast_60d": 1670792,
+    "total_qty_forecast_90d": 2715037,
+    "expected_back_30d": 282420,
+    "expected_back_60d": 1079332,
+    "expected_back_90d": 1337549,
+    "net_stock_30d": -552976,
+    "net_stock_60d": -591460,
+    "net_stock_90d": -1377488
   },
-  "weekly_demand_forecast": [
-    {
-      "week": "2026-07-14",
-      "forecast": 153854
-    },
-    {
-      "week": "2026-07-21",
-      "forecast": 39273
-    },
-    {
-      "week": "2026-07-28",
-      "forecast": 19300
-    },
-    {
-      "week": "2026-08-04",
-      "forecast": 14769
-    },
-    {
-      "week": "2026-08-11",
-      "forecast": 8979
-    },
-    {
-      "week": "2026-08-18",
-      "forecast": 11509
-    },
-    {
-      "week": "2026-08-25",
-      "forecast": 11614
-    },
-    {
-      "week": "2026-09-01",
-      "forecast": 6364
-    },
-    {
-      "week": "2026-09-08",
-      "forecast": 4669
-    },
-    {
-      "week": "2026-09-15",
-      "forecast": 9609
-    },
-    {
-      "week": "2026-09-22",
-      "forecast": 6152
-    },
-    {
-      "week": "2026-09-29",
-      "forecast": 5237
-    },
-    {
-      "week": "2026-10-06",
-      "forecast": 5831
-    }
-  ],
-  "monthly_demand_history": [
-    {
-      "month": "2023-01",
-      "total_qty": 223162.0
-    },
-    {
-      "month": "2023-02",
-      "total_qty": 229123.0
-    },
-    {
-      "month": "2023-03",
-      "total_qty": 238288.0
-    },
-    {
-      "month": "2023-04",
-      "total_qty": 230438.0
-    },
-    {
-      "month": "2023-05",
-      "total_qty": 239705.0
-    },
-    {
-      "month": "2023-06",
-      "total_qty": 227461.0
-    },
-    {
-      "month": "2023-07",
-      "total_qty": 203679.0
-    },
-    {
-      "month": "2023-08",
-      "total_qty": 189160.0
-    },
-    {
-      "month": "2023-09",
-      "total_qty": 177218.0
-    },
-    {
-      "month": "2023-10",
-      "total_qty": 162141.0
-    },
-    {
-      "month": "2023-11",
-      "total_qty": 156449.0
-    },
-    {
-      "month": "2023-12",
-      "total_qty": 121140.0
-    },
-    {
-      "month": "2024-01",
-      "total_qty": 107768.0
-    },
-    {
-      "month": "2024-02",
-      "total_qty": 109688.0
-    },
-    {
-      "month": "2024-03",
-      "total_qty": 105779.0
-    },
-    {
-      "month": "2024-04",
-      "total_qty": 133980.0
-    },
-    {
-      "month": "2024-05",
-      "total_qty": 132061.0
-    },
-    {
-      "month": "2024-06",
-      "total_qty": 157060.0
-    },
-    {
-      "month": "2024-07",
-      "total_qty": 176639.0
-    },
-    {
-      "month": "2024-08",
-      "total_qty": 173121.0
-    },
-    {
-      "month": "2024-09",
-      "total_qty": 183728.0
-    },
-    {
-      "month": "2024-10",
-      "total_qty": 209539.0
-    },
-    {
-      "month": "2024-11",
-      "total_qty": 222275.0
-    },
-    {
-      "month": "2024-12",
-      "total_qty": 208949.0
-    }
-  ],
+  "weekly_demand_forecast": {
+    "all_categories": [
+      {
+        "week": "2025-01-06",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 208849,
+        "lower": 183787,
+        "upper": 233911
+      }
+    ],
+    "Formwork Panels": [
+      {
+        "week": "2025-01-06",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 68517,
+        "lower": 60295,
+        "upper": 76739
+      }
+    ],
+    "Accessories & Connectors": [
+      {
+        "week": "2025-01-06",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 36494,
+        "lower": 32115,
+        "upper": 40874
+      }
+    ],
+    "Safety & Railings": [
+      {
+        "week": "2025-01-06",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 11237,
+        "lower": 9889,
+        "upper": 12586
+      }
+    ],
+    "Other": [
+      {
+        "week": "2025-01-06",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 17306,
+        "lower": 15229,
+        "upper": 19383
+      }
+    ],
+    "Scaffolding Components": [
+      {
+        "week": "2025-01-06",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 44975,
+        "lower": 39578,
+        "upper": 50373
+      }
+    ],
+    "Transport & Storage": [
+      {
+        "week": "2025-01-06",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 3591,
+        "lower": 3160,
+        "upper": 4022
+      }
+    ],
+    "Alignment & Struts": [
+      {
+        "week": "2025-01-06",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 1697,
+        "lower": 1493,
+        "upper": 1900
+      }
+    ],
+    "Walers & Beams": [
+      {
+        "week": "2025-01-06",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-01-13",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-01-20",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-01-27",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-02-03",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-02-10",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-02-17",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-02-24",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-03-03",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-03-10",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-03-17",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-03-24",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      },
+      {
+        "week": "2025-03-31",
+        "forecast": 25032,
+        "lower": 22028,
+        "upper": 28036
+      }
+    ]
+  },
+  "weekly_return_forecast": {
+    "all_categories": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 1942,
+        "cumulative": 1942
+      },
+      {
+        "week": "2025-01-13",
+        "expected_returns": 1008,
+        "cumulative": 2950
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 52947,
+        "cumulative": 55897
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 226523,
+        "cumulative": 282420
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 247850,
+        "cumulative": 530270
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 158553,
+        "cumulative": 688823
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 24214,
+        "cumulative": 713037
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 366295,
+        "cumulative": 1079332
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 23141,
+        "cumulative": 1102473
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 3372,
+        "cumulative": 1105845
+      },
+      {
+        "week": "2025-09-29",
+        "expected_returns": 3988,
+        "cumulative": 1109833
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 222494,
+        "cumulative": 1332327
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 5222,
+        "cumulative": 1337549
+      }
+    ],
+    "Formwork Panels": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 48,
+        "cumulative": 48
+      },
+      {
+        "week": "2025-01-13",
+        "expected_returns": 439,
+        "cumulative": 487
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 26450,
+        "cumulative": 26937
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 90550,
+        "cumulative": 117487
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 108218,
+        "cumulative": 225705
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 41679,
+        "cumulative": 267384
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 9069,
+        "cumulative": 276453
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 121563,
+        "cumulative": 398016
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 4550,
+        "cumulative": 402566
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 80,
+        "cumulative": 402646
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 67080,
+        "cumulative": 469726
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 836,
+        "cumulative": 470562
+      },
+      {
+        "week": "2025-12-29",
+        "expected_returns": 63780,
+        "cumulative": 534342
+      }
+    ],
+    "Accessories & Connectors": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 359,
+        "cumulative": 359
+      },
+      {
+        "week": "2025-01-13",
+        "expected_returns": 338,
+        "cumulative": 697
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 2328,
+        "cumulative": 3025
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 35584,
+        "cumulative": 38609
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 18665,
+        "cumulative": 57274
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 24816,
+        "cumulative": 82090
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 4275,
+        "cumulative": 86365
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 64664,
+        "cumulative": 151029
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 3032,
+        "cumulative": 154061
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 700,
+        "cumulative": 154761
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 50087,
+        "cumulative": 204848
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 2256,
+        "cumulative": 207104
+      },
+      {
+        "week": "2025-12-29",
+        "expected_returns": 29783,
+        "cumulative": 236887
+      }
+    ],
+    "Safety & Railings": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 243,
+        "cumulative": 243
+      },
+      {
+        "week": "2025-01-13",
+        "expected_returns": 60,
+        "cumulative": 303
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 7767,
+        "cumulative": 8070
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 12680,
+        "cumulative": 20750
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 10944,
+        "cumulative": 31694
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 9213,
+        "cumulative": 40907
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 626,
+        "cumulative": 41533
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 17164,
+        "cumulative": 58697
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 296,
+        "cumulative": 58993
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 100,
+        "cumulative": 59093
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 6413,
+        "cumulative": 65506
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 88,
+        "cumulative": 65594
+      },
+      {
+        "week": "2025-12-29",
+        "expected_returns": 11452,
+        "cumulative": 77046
+      }
+    ],
+    "Other": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 194,
+        "cumulative": 194
+      },
+      {
+        "week": "2025-01-13",
+        "expected_returns": 154,
+        "cumulative": 348
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 1569,
+        "cumulative": 1917
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 21853,
+        "cumulative": 23770
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 14122,
+        "cumulative": 37892
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 14613,
+        "cumulative": 52505
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 1877,
+        "cumulative": 54382
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 27794,
+        "cumulative": 82176
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 3835,
+        "cumulative": 86011
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 401,
+        "cumulative": 86412
+      },
+      {
+        "week": "2025-09-29",
+        "expected_returns": 480,
+        "cumulative": 86892
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 17557,
+        "cumulative": 104449
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 1012,
+        "cumulative": 105461
+      }
+    ],
+    "Scaffolding Components": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 705,
+        "cumulative": 705
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 10792,
+        "cumulative": 11497
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 44275,
+        "cumulative": 55772
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 54166,
+        "cumulative": 109938
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 39653,
+        "cumulative": 149591
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 5701,
+        "cumulative": 155292
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 72259,
+        "cumulative": 227551
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 10694,
+        "cumulative": 238245
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 612,
+        "cumulative": 238857
+      },
+      {
+        "week": "2025-09-29",
+        "expected_returns": 2513,
+        "cumulative": 241370
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 47716,
+        "cumulative": 289086
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 688,
+        "cumulative": 289774
+      },
+      {
+        "week": "2025-12-29",
+        "expected_returns": 38879,
+        "cumulative": 328653
+      }
+    ],
+    "Transport & Storage": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 117,
+        "cumulative": 117
+      },
+      {
+        "week": "2025-01-13",
+        "expected_returns": 17,
+        "cumulative": 134
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 748,
+        "cumulative": 882
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 2624,
+        "cumulative": 3506
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 3832,
+        "cumulative": 7338
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 2835,
+        "cumulative": 10173
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 530,
+        "cumulative": 10703
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 5707,
+        "cumulative": 16410
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 654,
+        "cumulative": 17064
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 1159,
+        "cumulative": 18223
+      },
+      {
+        "week": "2025-09-29",
+        "expected_returns": 79,
+        "cumulative": 18302
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 4301,
+        "cumulative": 22603
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 170,
+        "cumulative": 22773
+      }
+    ],
+    "Alignment & Struts": [
+      {
+        "week": "2025-01-27",
+        "expected_returns": 275,
+        "cumulative": 275
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 1325,
+        "cumulative": 1600
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 892,
+        "cumulative": 2492
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 950,
+        "cumulative": 3442
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 24,
+        "cumulative": 3466
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 6136,
+        "cumulative": 9602
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 2157,
+        "cumulative": 11759
+      },
+      {
+        "week": "2025-12-29",
+        "expected_returns": 1540,
+        "cumulative": 13299
+      },
+      {
+        "week": "2026-01-26",
+        "expected_returns": 1325,
+        "cumulative": 14624
+      },
+      {
+        "week": "2026-02-23",
+        "expected_returns": 240,
+        "cumulative": 14864
+      },
+      {
+        "week": "2026-03-30",
+        "expected_returns": 1850,
+        "cumulative": 16714
+      }
+    ],
+    "Walers & Beams": [
+      {
+        "week": "2024-12-30",
+        "expected_returns": 276,
+        "cumulative": 276
+      },
+      {
+        "week": "2025-01-27",
+        "expected_returns": 3018,
+        "cumulative": 3294
+      },
+      {
+        "week": "2025-02-24",
+        "expected_returns": 17632,
+        "cumulative": 20926
+      },
+      {
+        "week": "2025-03-31",
+        "expected_returns": 37011,
+        "cumulative": 57937
+      },
+      {
+        "week": "2025-04-28",
+        "expected_returns": 24794,
+        "cumulative": 82731
+      },
+      {
+        "week": "2025-05-26",
+        "expected_returns": 2112,
+        "cumulative": 84843
+      },
+      {
+        "week": "2025-06-30",
+        "expected_returns": 51008,
+        "cumulative": 135851
+      },
+      {
+        "week": "2025-07-28",
+        "expected_returns": 80,
+        "cumulative": 135931
+      },
+      {
+        "week": "2025-08-25",
+        "expected_returns": 320,
+        "cumulative": 136251
+      },
+      {
+        "week": "2025-09-29",
+        "expected_returns": 916,
+        "cumulative": 137167
+      },
+      {
+        "week": "2025-10-27",
+        "expected_returns": 27183,
+        "cumulative": 164350
+      },
+      {
+        "week": "2025-11-24",
+        "expected_returns": 172,
+        "cumulative": 164522
+      },
+      {
+        "week": "2025-12-29",
+        "expected_returns": 28351,
+        "cumulative": 192873
+      }
+    ]
+  },
   "market_breakdown": [
     {
       "market": "21 Residential (Multi-Family) - Commercial",
-      "total_qty": 2772693.0,
-      "pct": 64.2
+      "total_qty": 2880537,
+      "pct": 64.4
     },
     {
       "market": "77 Residential (Multi-Family) - Commercial",
-      "total_qty": 782388.0,
-      "pct": 18.1
+      "total_qty": 803559,
+      "pct": 18.0
     },
     {
       "market": "23 Offices - Commercial",
-      "total_qty": 253914.0,
+      "total_qty": 262822,
       "pct": 5.9
     },
     {
       "market": "03 Bridges - Civil",
-      "total_qty": 146695.0,
+      "total_qty": 150376,
       "pct": 3.4
     },
     {
       "market": "42 Water & Sewage Treat Plants - Civil",
-      "total_qty": 86382.0,
+      "total_qty": 89058,
       "pct": 2.0
     },
     {
       "market": "35 Educational - Commercial",
-      "total_qty": 65379.0,
+      "total_qty": 67831,
       "pct": 1.5
     },
     {
       "market": "33 Government Buildings - Commercial",
-      "total_qty": 49153.0,
+      "total_qty": 50685,
       "pct": 1.1
     },
     {
       "market": "70 Mixed Use - Commercial",
-      "total_qty": 28127.0,
+      "total_qty": 30185,
       "pct": 0.7
     },
     {
       "market": "34 Hospitals / Medical - Commercial",
-      "total_qty": 26953.0,
+      "total_qty": 28069,
       "pct": 0.6
     },
     {
       "market": "22 Hotels & Casinos - Commercial",
-      "total_qty": 24893.0,
+      "total_qty": 25942,
       "pct": 0.6
     },
     {
       "market": "74 Power, Trans & Dist - Civil",
-      "total_qty": 20793.0,
+      "total_qty": 21018,
       "pct": 0.5
     },
     {
       "market": "27 Theatres/Amusement/Religious - Commercial",
-      "total_qty": 18911.0,
+      "total_qty": 19536,
       "pct": 0.4
     },
     {
       "market": "04 Dams and Canals - Civil",
-      "total_qty": 15791.0,
+      "total_qty": 16495,
       "pct": 0.4
     },
     {
       "market": "40 Other Industrial - Industrial Other",
-      "total_qty": 7608.0,
+      "total_qty": 7610,
       "pct": 0.2
     },
     {
       "market": "25 Other Civil - Civil",
-      "total_qty": 4399.0,
+      "total_qty": 4432,
       "pct": 0.1
     },
     {
       "market": "38 Cement/Steel/Metal - Industrial Other",
-      "total_qty": 3878.0,
+      "total_qty": 3890,
       "pct": 0.1
     },
     {
       "market": "71 Retail and Restaurants - Commercial",
-      "total_qty": 2655.0,
+      "total_qty": 2805,
       "pct": 0.1
     },
     {
       "market": "72 Other Civil - Civil",
-      "total_qty": 2035.0,
+      "total_qty": 2035,
       "pct": 0.0
     },
     {
       "market": "24 Parking Garages - Commercial",
-      "total_qty": 1947.0,
+      "total_qty": 1965,
       "pct": 0.0
     },
     {
       "market": "73 Production (Oil & Gas) - Upstream O&G",
-      "total_qty": 1762.0,
+      "total_qty": 1775,
       "pct": 0.0
     },
     {
       "market": "32 Airports - Civil",
-      "total_qty": 884.0,
+      "total_qty": 888,
       "pct": 0.0
     },
     {
       "market": "37 Food & Beverage - Industrial Other",
-      "total_qty": 883.0,
+      "total_qty": 884,
       "pct": 0.0
     },
     {
       "market": "06 Transit Ways - Civil",
-      "total_qty": 428.0,
+      "total_qty": 458,
+      "pct": 0.0
+    },
+    {
+      "market": "76 Other Industrial - Industrial Other",
+      "total_qty": 70,
       "pct": 0.0
     }
   ],
   "category_volume": [
     {
-      "category": "Accessories & Connectors",
-      "total_qty": 1250614.0,
-      "pct": 29.0
-    },
-    {
-      "category": "Other",
-      "total_qty": 1137648.0,
-      "pct": 26.3
-    },
-    {
-      "category": "Alignment & Struts",
-      "total_qty": 558077.0,
-      "pct": 12.9
-    },
-    {
-      "category": "Walers & Beams",
-      "total_qty": 512576.0,
-      "pct": 11.9
-    },
-    {
       "category": "Formwork Panels",
-      "total_qty": 508904.0,
-      "pct": 11.8
-    },
-    {
-      "category": "Safety & Railings",
-      "total_qty": 152653.0,
-      "pct": 3.5
+      "total_qty": 1447044,
+      "pct_of_total": 32.4
     },
     {
       "category": "Scaffolding Components",
-      "total_qty": 133104.0,
-      "pct": 3.1
+      "total_qty": 944899,
+      "pct_of_total": 21.1
+    },
+    {
+      "category": "Accessories & Connectors",
+      "total_qty": 792786,
+      "pct_of_total": 17.7
+    },
+    {
+      "category": "Walers & Beams",
+      "total_qty": 531885,
+      "pct_of_total": 11.9
+    },
+    {
+      "category": "Other",
+      "total_qty": 411547,
+      "pct_of_total": 9.2
+    },
+    {
+      "category": "Safety & Railings",
+      "total_qty": 234319,
+      "pct_of_total": 5.2
     },
     {
       "category": "Transport & Storage",
-      "total_qty": 64975.0,
-      "pct": 1.5
+      "total_qty": 75038,
+      "pct_of_total": 1.7
+    },
+    {
+      "category": "Alignment & Struts",
+      "total_qty": 35407,
+      "pct_of_total": 0.8
+    }
+  ],
+  "monthly_demand_history": [
+    {
+      "month": "2023-01",
+      "total_qty": 229588.0
+    },
+    {
+      "month": "2023-02",
+      "total_qty": 234391.0
+    },
+    {
+      "month": "2023-03",
+      "total_qty": 246908.0
+    },
+    {
+      "month": "2023-04",
+      "total_qty": 238345.0
+    },
+    {
+      "month": "2023-05",
+      "total_qty": 245419.0
+    },
+    {
+      "month": "2023-06",
+      "total_qty": 236007.0
+    },
+    {
+      "month": "2023-07",
+      "total_qty": 207640.0
+    },
+    {
+      "month": "2023-08",
+      "total_qty": 195053.0
+    },
+    {
+      "month": "2023-09",
+      "total_qty": 183265.0
+    },
+    {
+      "month": "2023-10",
+      "total_qty": 167449.0
+    },
+    {
+      "month": "2023-11",
+      "total_qty": 160838.0
+    },
+    {
+      "month": "2023-12",
+      "total_qty": 125232.0
+    },
+    {
+      "month": "2024-01",
+      "total_qty": 112552.0
+    },
+    {
+      "month": "2024-02",
+      "total_qty": 114860.0
+    },
+    {
+      "month": "2024-03",
+      "total_qty": 110651.0
+    },
+    {
+      "month": "2024-04",
+      "total_qty": 139746.0
+    },
+    {
+      "month": "2024-05",
+      "total_qty": 135186.0
+    },
+    {
+      "month": "2024-06",
+      "total_qty": 163103.0
+    },
+    {
+      "month": "2024-07",
+      "total_qty": 185527.0
+    },
+    {
+      "month": "2024-08",
+      "total_qty": 181964.0
+    },
+    {
+      "month": "2024-09",
+      "total_qty": 193438.0
+    },
+    {
+      "month": "2024-10",
+      "total_qty": 220546.0
+    },
+    {
+      "month": "2024-11",
+      "total_qty": 230619.0
+    },
+    {
+      "month": "2024-12",
+      "total_qty": 214598.0
     }
   ]
 }

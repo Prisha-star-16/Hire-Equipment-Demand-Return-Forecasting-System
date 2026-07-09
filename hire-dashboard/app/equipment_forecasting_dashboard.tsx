@@ -24,12 +24,18 @@ import {
 // --- TS TYPE CONTRACT MATCHING PYTHON PIPELINE (forecast_results.json) ---
 interface KPISummary {
   total_orders: number;
+
   total_qty_forecast_30d: number;
   total_qty_forecast_60d: number;
   total_qty_forecast_90d: number;
-  total_returns_forecast_30d: number;
-  total_returns_forecast_60d: number;
-  total_returns_forecast_90d: number;
+
+  expected_back_30d: number;
+  expected_back_60d: number;
+  expected_back_90d: number;
+
+  net_stock_30d: number;
+  net_stock_60d: number;
+  net_stock_90d: number;
 }
 
 interface DemandPoint {
@@ -86,15 +92,21 @@ interface LivePipelineData {
 
 // --- STANDARD HIGH-FIDELITY FALLBACK DATA ---
 const fallbackData: LivePipelineData = {
-  kpi_summary: {
+ kpi_summary: {
     total_orders: 12450,
+
     total_qty_forecast_30d: 165600,
     total_qty_forecast_60d: 312000,
     total_qty_forecast_90d: 450000,
-    total_returns_forecast_30d: 136100,
-    total_returns_forecast_60d: 295000,
-    total_returns_forecast_90d: 480000
-  },
+
+    expected_back_30d: 136100,
+    expected_back_60d: 295000,
+    expected_back_90d: 480000,
+
+    net_stock_30d: -29500,
+    net_stock_60d: -17000,
+    net_stock_90d: 30000,
+}, 
   weekly_demand_forecast: {
     all_categories: [
       { week: 'Wk 1', forecast: 38500, lower: 33400, upper: 43600 },
@@ -361,55 +373,47 @@ export default function Dashboard() {
 
   // Load live JSON from public assets folder matching Python outputs
   useEffect(() => {
-    fetch('/data/forecast_results.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Live JSON endpoint not found');
-        return res.json();
-      })
-      .then((payload: any) => {
 
-    if (Array.isArray(payload.weekly_demand_forecast)) {
-        payload.weekly_demand_forecast = {
-            all_categories: payload.weekly_demand_forecast
-        };
-    }
+    console.log("Dashboard mounted");
 
-    if (!payload.weekly_return_forecast) {
-        payload.weekly_return_forecast = {
-            all_categories: payload.weekly_demand_forecast.all_categories.map((x:any)=>({
-                week: x.week,
-                expected_returns: 0,
-                cumulative: 0
-            }))
-        };
-    }
+    fetch("/data/forecast_results.json")
+        .then((res) => {
 
-    if (!payload.orderTypes) {
-        payload.orderTypes = fallbackData.orderTypes;
-    }
+            console.log("Response status:", res.status);
 
-    setData(payload);
-    setIsLive(true);
-})
-      .catch((err) => {
-        console.warn('Next.js is using built-in high-fidelity analytics fallback payload.', err);
-        setData(fallbackData);
-        setIsLive(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+            if (!res.ok)
+                throw new Error("JSON not found");
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-white text-[#002f6c] font-sans">
-        <RefreshCw className="w-10 h-10 animate-spin text-[#ff5a00] mb-4" />
-        <p className="text-lg font-bold tracking-tight">Syncing SGB Machine Learning Pipeline...</p>
-        <p className="text-xs text-slate-400 mt-1">Reading forecast_results.json</p>
-      </div>
-    );
-  }
+            return res.json();
+        })
+
+        .then((payload) => {
+
+            console.log("FULL JSON");
+            console.log(payload);
+
+            setData(payload);
+            setIsLive(true);
+        })
+
+        .catch((err) => {
+
+            console.error("FETCH ERROR");
+
+            console.error(err);
+
+            setData(fallbackData);
+            setIsLive(false);
+
+        })
+
+        .finally(() => {
+
+            setLoading(false);
+
+        });
+
+}, []);
 
   // Determine timeframe length in weeks: 30 days = 4 weeks, 60 days = 8 weeks, 90 days = 12 weeks
   const weekLimit = selectedTimeframe === '30' ? 4 : selectedTimeframe === '60' ? 8 : 12;
@@ -424,17 +428,22 @@ const weeklyReturnForecast = Array.isArray(data?.weekly_return_forecast)
   : (data?.weekly_return_forecast ?? fallbackData.weekly_return_forecast);
 
 // Demand
+const demandForecast =
+  weeklyDemandForecast as Record<string, DemandPoint[]>;
+
 const rawDemandPoints =
-  weeklyDemandForecast[selectedCategory] ??
-  weeklyDemandForecast.all_categories ??
+  demandForecast[selectedCategory] ??
+  demandForecast["all_categories"] ??
   [];
 
 // Returns
-const rawReturnPoints =
-  weeklyReturnForecast[selectedCategory] ??
-  weeklyReturnForecast.all_categories ??
-  [];
+const returnForecast =
+  weeklyReturnForecast as Record<string, ReturnPoint[]>;
 
+const rawReturnPoints =
+  returnForecast[selectedCategory] ??
+  returnForecast["all_categories"] ??
+  [];
 // Safe arrays
 const demandPoints = Array.isArray(rawDemandPoints)
   ? rawDemandPoints.slice(0, weekLimit)
@@ -451,20 +460,23 @@ const returnPoints = Array.isArray(rawReturnPoints)
   // Safe calculated KPI metrics
   const summaryKPI = data?.kpi_summary || fallbackData.kpi_summary;
 
-  const totalDemand = selectedTimeframe === '30' 
-    ? summaryKPI.total_qty_forecast_30d 
-    : selectedTimeframe === '60' 
-      ? summaryKPI.total_qty_forecast_60d 
-      : summaryKPI.total_qty_forecast_90d;
+const totalDemand =
+  selectedTimeframe === "30"
+    ? summaryKPI.total_qty_forecast_30d
+    : selectedTimeframe === "60"
+    ? summaryKPI.total_qty_forecast_60d
+    : summaryKPI.total_qty_forecast_90d;
 
-  const totalReturns = selectedTimeframe === '30' 
-    ? summaryKPI.total_returns_forecast_30d 
-    : selectedTimeframe === '60' 
-      ? summaryKPI.total_returns_forecast_60d 
-      : summaryKPI.total_returns_forecast_90d;
+const totalReturns =
+  selectedTimeframe === "30"
+    ? summaryKPI.expected_back_30d
+    : selectedTimeframe === "60"
+    ? summaryKPI.expected_back_60d
+    : summaryKPI.expected_back_90d;
 
-  const netBalance = totalReturns - totalDemand;
-  const isDeficit = netBalance < 0;
+const netBalance = totalReturns - totalDemand;
+
+const isDeficit = netBalance < 0;
 
   // Calculate highest chart scale dynamically to avoid overflow cutoffs
   const maxChartValue =
@@ -479,10 +491,17 @@ const returnPoints = Array.isArray(rawReturnPoints)
     attritionBreakdown: []
   };
 
-  const maxAttritionValue = Math.max(
-    ...orderTypesData.attritionBreakdown.map(d => (d.sale || 0) + (d.oea || 0)),
+ const attritionBreakdown =
+    Array.isArray(orderTypesData?.attritionBreakdown)
+        ? orderTypesData.attritionBreakdown
+        : [];
+
+const maxAttritionValue = Math.max(
+    ...attritionBreakdown.map((d: AttritionItem) =>
+        Number(d.sale ?? 0) + Number(d.oea ?? 0)
+    ),
     1
-  );
+);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased pb-16">
@@ -574,7 +593,7 @@ const returnPoints = Array.isArray(rawReturnPoints)
             </div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Required Outgoing</p>
             <h3 className="text-3xl font-black text-[#002f6c] mt-2">
-              {totalDemand.toLocaleString()} <span className="text-sm font-semibold text-slate-500">units</span>
+              {Number(totalDemand ?? 0).toLocaleString()} <span className="text-sm font-semibold text-slate-500">units</span>
             </h3>
             <p className="text-xs text-slate-500 mt-2 flex items-center">
               <TrendingUp className="w-4 h-4 text-[#002f6c] mr-1.5" />
@@ -589,7 +608,7 @@ const returnPoints = Array.isArray(rawReturnPoints)
             </div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Expected Back</p>
             <h3 className="text-3xl font-black text-emerald-600 mt-2">
-              {totalReturns.toLocaleString()} <span className="text-sm font-semibold text-slate-500">units</span>
+              {Number(totalReturns ?? 0).toLocaleString()} <span className="text-sm font-semibold text-slate-500">units</span>
             </h3>
             <p className="text-xs text-slate-500 mt-2 flex items-center">
               <TrendingDown className="w-4 h-4 text-emerald-500 mr-1.5" />
@@ -604,7 +623,7 @@ const returnPoints = Array.isArray(rawReturnPoints)
             <div>
               <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Net Stock Deficit/Surplus</p>
               <h3 className={`text-3xl font-black mt-2 ${isDeficit ? 'text-[#ff5a00]' : 'text-emerald-600'}`}>
-                {isDeficit ? '-' : '+'}{Math.abs(netBalance).toLocaleString()} <span className="text-sm font-semibold text-slate-500">units</span>
+                {isDeficit ? '-' : '+'}{Number(Math.abs(netBalance ?? 0)).toLocaleString()} <span className="text-sm font-semibold text-slate-500">units</span>
               </h3>
             </div>
             <p className="text-xs font-semibold mt-3 flex items-start">
@@ -924,7 +943,7 @@ const returnPoints = Array.isArray(rawReturnPoints)
                  <Briefcase className="w-5 h-5 mr-2" />
                  <h4 className="font-bold text-xs uppercase tracking-wider">Standard HIRE</h4>
                </div>
-               <p className="text-3xl font-black text-[#002f6c]">{orderTypesData.summary.hire.toLocaleString()}</p>
+               <p className="text-3xl font-black text-[#002f6c]">{Number(orderTypesData?.summary?.hire ?? 0).toLocaleString()}</p>
                <p className="text-xs text-slate-500 mt-1">Total items actively earning on current hiring invoices.</p>
             </div>
             
@@ -933,7 +952,7 @@ const returnPoints = Array.isArray(rawReturnPoints)
                  <DollarSign className="w-5 h-5 mr-2" />
                  <h4 className="font-bold text-xs uppercase tracking-wider">Lost to SALE</h4>
                </div>
-               <p className="text-3xl font-black text-purple-700">{orderTypesData.summary.sale.toLocaleString()}</p>
+               <p className="text-3xl font-black text-purple-700">{Number(orderTypesData?.summary?.sale ?? 0).toLocaleString()}</p>
                <p className="text-xs text-slate-500 mt-1">Total inventory permanently sold off to clients.</p>
             </div>
 
@@ -942,14 +961,14 @@ const returnPoints = Array.isArray(rawReturnPoints)
                  <MinusCircle className="w-5 h-5 mr-2" />
                  <h4 className="font-bold text-xs uppercase tracking-wider">Lost to OEA (Scrap)</h4>
                </div>
-               <p className="text-3xl font-black text-red-600">{orderTypesData.summary.oea.toLocaleString()}</p>
+               <p className="text-3xl font-black text-red-600">{Number(orderTypesData?.summary?.oea ?? 0).toLocaleString()}</p>
                <p className="text-xs text-slate-500 mt-1">Equipment scrapped, severely damaged, or unrecovered.</p>
             </div>
           </div>
 
           <h3 className="font-bold text-sm text-slate-700 mb-4 uppercase tracking-wider">Highest Attrition Categories (SALE + OEA)</h3>
           <div className="space-y-4">
-             {orderTypesData.attritionBreakdown.map((item, idx) => {
+             {attritionBreakdown.map((item: AttritionItem, idx: number) => {
                const salePct = ((item.sale || 0) / maxAttritionValue) * 100;
                const oeaPct = ((item.oea || 0) / maxAttritionValue) * 100;
                const totalLost = (item.sale || 0) + (item.oea || 0);
@@ -984,7 +1003,7 @@ const returnPoints = Array.isArray(rawReturnPoints)
                    </div>
                    
                    <div className="w-full sm:w-36 text-left sm:text-right font-black text-slate-700 mt-1 sm:mt-0">
-                     {totalLost.toLocaleString()} total lost
+                    {Number(totalLost ?? 0).toLocaleString()}  total lost
                    </div>
                  </div>
                );
